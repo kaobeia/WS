@@ -1,0 +1,129 @@
+
+<html>
+ 
+    <head>
+     
+        <title>DEMO</title>
+        
+        <script>
+        //定义一些变量
+        var chat_board;// 聊天面板
+        var send_board;// 发送面板
+        </script>
+     
+    </head>
+     
+    <body>
+     
+        <div id = 'chat_board' style = "overflow-y:auto; overflow-x:hidden;; border : 1px solid; margin : auto">
+        
+        </div>
+     
+        <div id = 'send_board' style = "border : 1px solid; margin : auto">
+        
+            <input type = 'file' id = 'file'/>
+            
+            <button onclick = 'send_pic()'>send pic</button>
+            
+            <br/>
+            <input type = 'text' id = 'msg'/>
+            
+            <button onclick = 'send_txt()'>send txt</button>
+            
+        </div>
+     
+    </body>
+     
+    <script>//初始化一些样式
+        
+        //聊天面板
+        var chat_board_width = document.body.clientWidth - 50;
+        var chat_board_height = document.body.clientHeight - 100;
+        
+        chat_board = document.getElementById('chat_board');
+        
+        chat_board.style.width = chat_board_width;
+        chat_board.style.height = chat_board_height;
+        
+        //发送面板
+        var send_board_height = 80;
+        var send_board_width = chat_board_width;
+        
+        send_board = document.getElementById('send_board');
+        
+        send_board.style.width = send_board_width;
+        send_board.style.height = send_board_height;
+     
+    </script>
+     
+    <script>//建立socket
+     
+        so = new WebSocket('ws://localhost:8080');
+        //send_pic.js中有引用
+     
+        so.onopen = function()
+        {
+            if (so.readyState==1)
+            {
+            }
+            
+        };
+        
+        so.onmessage = function(message)
+        {
+            eval ('var message = ' + message.data); //因为message.data是json值，所以要转化一下
+            if (message.type == 'img')
+            {
+                show_img(message.nr);
+            }
+            else if (message.type == 'txt')
+            {
+                show_text(message.nr);
+            }
+        };
+        
+        so.onclose = function()
+        {
+        };
+     
+    </script>
+     
+    <script src = 'send_pic.js'>//发送图片 代码比较长，就引用外部js了
+    //send_pic 中包含了函数 send_pic() 后台将图片传到 file文件夹
+    </script>
+     
+    <script> //functions 
+    function show_text(str){
+        var node = document.createElement('p')
+        var textnode=document.createTextNode(str);
+        node.appendChild(textnode);
+        node.setAttribute('style', 'color : blue')
+        chat_board.appendChild(node);
+        //显示最下面一行 滚动
+        chat_board.scrollTop=Math.max(0, chat_board.scrollHeight-chat_board.offsetHeight);
+    }
+     
+    function show_img(img_url){
+        //加入空行
+        var br = document.createElement("br");
+        chat_board.appendChild(br);
+        
+        var node = document.createElement('img')
+        node.setAttribute('src', img_url)
+        node.setAttribute('style', 'width:150; height:150')
+        chat_board.appendChild(node);
+        //显示最下面一行 滚动
+        chat_board.scrollTop=Math.max(0, chat_board.scrollHeight-chat_board.offsetHeight);
+    }
+     
+    function send_txt(){
+        var msg = document.getElementById('msg').value.trim();
+        if (msg == '')
+            return;
+            
+        so.send("nr=" + esc(msg) + "&type=txt")
+        document.getElementById('msg').value = '';
+    }
+    </script>
+     
+    </html>
