@@ -28,7 +28,7 @@ transition-timing-function： 在延續時間段，變換的速率變化；
 transition- delay ：變換延遲時間  
 ##### opacity 基本介紹 #####  
 opacity是透明度的意思，通過可以設置元素的透明度。比如說壹個元素的opacity屬性設置為opacity(0.3)，那該元素透明度為70%。opacity(1)代表不透明。  
-#### (2)解決方法： ####  
+#### (2)解決方法 ####  
 **初始**  
 圖片的div(class="video")的opacity(1)(可無)，動態變換後的div(class="mask")的opacity(0),transform:scale(0.3);  
 **.video:hover後**  
@@ -57,7 +57,7 @@ opacity是透明度的意思，通過可以設置元素的透明度。比如說�
   opacity: 1;
  }
  ```   
- #### （3）詳情頁面的二維碼選項卡效果： ####  
+ #### （3）詳情頁面的二維碼選項卡效果 ####  
  該效果主要運用了js的點擊事件來改變css樣式實現  
  **Js部分說明**  
  壹共兩個div，壹個wechat，壹個zhifubao。壹開始影藏zhifubao(display:none;)；當發生點擊事件後，將wechat隱藏(display:none;),將zhifubao顯示(display:block;)  
@@ -120,5 +120,8 @@ opacity是透明度的意思，通過可以設置元素的透明度。比如說�
 
 </script>
 ```
-
+### 網頁內容來源： ####  
+https://www.douban.com/  
+### 參考資料： ###  
+https://download.csdn.net/download/qq_42103479/11090450?utm_medium=distribute.pc_relevant.none-task-download-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-download-BlogCommendFromBaidu-1.control
  
