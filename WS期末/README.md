@@ -56,4 +56,69 @@ opacity是透明度的意思，通過可以設置元素的透明度。比如說�
   filter: alpha(opacity=100);
   opacity: 1;
  }
- ```
+ ```   
+ #### （3）詳情頁面的二維碼選項卡效果： ####  
+ 該效果主要運用了js的點擊事件來改變css樣式實現  
+ **Js部分說明**  
+ 壹共兩個div，壹個wechat，壹個zhifubao。壹開始影藏zhifubao(display:none;)；當發生點擊事件後，將wechat隱藏(display:none;),將zhifubao顯示(display:block;)  
+ **關鍵代碼：**  
+```
+<span class="on" id="wechat">微信</span>
+<span class="off" id="zhifubao">支付宝</span>
+<div class="QR_cont">
+	<img src='http://i4.buimg.com/1949/48e44e9ad74be097.png' width="250" height="250" id="img1">
+	<img src='http://i2.muimg.com/1949/50e198ca7616899e.png' width="250" height="250" id="img2">
+</div>
+<script>
+	var oWc = document.getElementById("wechat");
+	var oZfb = document.getElementById("zhifubao");
+	oWc.onclick = function(){
+		oWc.className = "on";
+		oZfb.className = "off";		
+		document.getElementById("img1").style.display = "block";
+		document.getElementById("img2").style.display = "none";	
+		oZfb.style.background = "#B2AEAE";
+	};
+	oZfb.onclick = function(){
+		oZfb.className = "on";
+		oWc.className = "off";
+		document.getElementById("img1").style.display = "none";
+		document.getElementById("img2").style.display = "block";
+		document.getElementById("img2").style.borderColor = "#32A5E7";
+		oZfb.style.background = "#32A5E7";
+
+	};
+</script>
+```  
+#### （4）登錄界面以及簡單的m密碼驗證 ####  
+樣式主要通過css的樣式設計完成，還使用了兩個矢量圖標。簡單的密碼驗證通過js。  
+**關鍵代碼：**  
+```
+<script>
+
+	var oA1 = document.getElementById('a1');
+	var oText = document.getElementById('id');
+	var oPw = document.getElementById('password');
+	var oDel1 = document.getElementById('del1');
+	var oDel2 = document.getElementById('del2');
+	var oUser = document.getElementById('user');
+	oA1.onclick = function(){
+		if (oText.value == '' || oPw.value == '') {
+			alert('用户名和密码不能为空');
+			
+		}
+		else if(oPw.value.length<6){
+			alert("密码长度不得低于六位");
+		}
+	};
+	oDel1.onclick = function(){
+		oText.value = '';
+	};
+	oDel2.onclick = function(){
+		oPw.value = '';
+	};
+
+</script>
+```
+
+ 
