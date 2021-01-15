@@ -120,6 +120,8 @@ opacity是透明度的意思，通過可以設置元素的透明度。比如說�
 
 </script>
 ```
+
+## 成果： ##  
 ![image](https://github.com/kaobeia/WS/blob/main/WS%E6%9C%9F%E6%9C%AB/demo.gif)
 ### 網頁內容來源： ####  
 https://www.douban.com/  
